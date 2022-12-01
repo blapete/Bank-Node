@@ -33,6 +33,8 @@ class Bank {
   show() {}
 }
 
-const oAccount = new Account({ name: 'peter', balance: 4.5, password: 'test' });
+// oBank.askForValidAccountNumber();
 
-console.log(oAccount);
+module.exports = {
+  Bank,
+};

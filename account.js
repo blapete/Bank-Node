@@ -1,24 +1,31 @@
+// Custom exception
+const AbortTransaction = (message) => ({
+  error: new Error(message),
+  code: 'VALIDATION_ERROR',
+});
+
 class Account {
-  constructor(name, balance, password) {
-    this.name = name;
-    this.balance = validateAmount(balance);
+  constructor(password) {
+    // this.name = name;
+    // this.balance = validateAmount(balance);
     this.password = password;
   }
 
-  validateAmount(amount) {}
+  //   validateAmount(amount) {}
 
   checkPasswordMatch(password) {
     if (password != this.password) {
+      throw AbortTransaction('an example error');
     }
   }
 
-  deposit() {}
+  //   deposit() {}
 
-  getBalance() {
-    return this.balance;
-  }
+  //   getBalance() {
+  //     return this.balance;
+  //   }
 
-  withdraw() {}
+  //   withdraw() {}
 
   show() {
     console.log('       Name:', this.name);
@@ -26,3 +33,9 @@ class Account {
     console.log('       Password:', this.password);
   }
 }
+
+const oAccount = new Account('test');
+
+// console.log(oAccount);
+
+console.log(oAccount.checkPasswordMatch('test1'));

@@ -6,14 +6,15 @@ class AbortTransaction extends Error {
   }
 }
 
+// Account
 class Account {
   constructor({ name, balance, password }) {
     this.name = name;
     this.balance = this.validateAmount(balance);
     this.password = password;
 
-    // if (Object.keys(arguments[0]).length != 3)
-    //   throw new AbortTransaction('All fields required');
+    if (Object.keys(arguments[0]).length != 3)
+      throw new AbortTransaction('All fields required');
   }
 
   validateAmount(amount) {
@@ -53,6 +54,7 @@ class Account {
   }
 }
 
-const oAccount = new Account({ name: 'peter', balance: 4.5, password: 'test' });
-
-console.log(oAccount);
+module.exports = {
+  AbortTransaction,
+  Account,
+};

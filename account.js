@@ -35,15 +35,15 @@ class Account {
     return this.balance;
   }
 
-  getBalance() {
-    return this.balance;
-  }
-
   withdraw(amountToWithdraw) {
     amountToWithdraw = this.validateAmount(amountToWithdraw);
     if (amountToWithdraw > this.balance) throw new AbortTransaction('Insufficient funds');
 
     this.balance = this.balance - amountToWithdraw;
+  }
+
+  getBalance() {
+    return this.balance;
   }
 
   show() {

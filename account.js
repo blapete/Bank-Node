@@ -7,14 +7,20 @@ class AbortTransaction extends Error {
 }
 
 class Account {
-  constructor(name, balance, password) {
+  constructor({ name, balance, password }) {
     this.name = name;
     this.balance = this.validateAmount(balance);
     this.password = password;
+
+    // if (Object.keys(arguments[0]).length != 3)
+    //   throw new AbortTransaction('All fields required');
   }
 
   validateAmount(amount) {
-    console.log(amount);
+    if (isNaN(amount)) throw new AbortTransaction('Amount must be an integer');
+    if (amount < 0) throw new AbortTransaction('Amount must be positive');
+
+    return amount;
   }
 
   checkPasswordMatch(password) {
@@ -47,10 +53,6 @@ class Account {
   }
 }
 
-const oAccount = new Account('test');
+const oAccount = new Account({ name: 'peter', balance: 4.5, password: 'test' });
 
-// console.log(oAccount);
-
-// console.log(oAccount.checkPasswordMatch('test1'));
-
-// console.log(oAccount.show());
+console.log(oAccount);

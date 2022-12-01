@@ -21,4 +21,6 @@ while (true) {
   console.log('To show all accounts, press s');
   console.log('To make a withdrawal, press w ');
   console.log('');
+
+  // Ask user for input
 }

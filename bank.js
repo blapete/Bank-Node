@@ -29,12 +29,8 @@ class Bank {
 
   getInfo() {}
 
-  // for bank admin
+  // For bank admin
   show() {}
 }
 
-// oBank.askForValidAccountNumber();
-
-module.exports = {
-  Bank,
-};
+module.exports = { Bank };

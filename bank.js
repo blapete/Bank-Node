@@ -18,17 +18,29 @@ class Bank {
 
   createAccount() {}
 
-  openAccount() {}
+  openAccount() {
+    console.log('*** Open Account ***');
+  }
 
-  closeAccount() {}
+  closeAccount() {
+    console.log('*** Close Account ***');
+  }
 
-  balance() {}
+  balance() {
+    console.log('*** Get Balance ***');
+  }
 
-  deposit() {}
+  deposit() {
+    console.log(' *** Deposit ***');
+  }
 
-  withdraw() {}
+  withdraw() {
+    console.log(' *** Withdraw ***');
+  }
 
-  getInfo() {}
+  getInfo() {
+    console.log(`hours: ${this.hours} \nAddress: ${this.address} \nPhone: ${this.phone}`);
+  }
 
   // For bank admin
   show() {}

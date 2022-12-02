@@ -25,9 +25,7 @@ class Account {
   }
 
   checkPasswordMatch(password) {
-    if (password != this.password) {
-      throw new AbortTransaction('Incorrect Password');
-    }
+    if (password != this.password) throw new AbortTransaction('Incorrect Password');
   }
 
   deposit(amountToDeposit) {

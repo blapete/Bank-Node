@@ -1,5 +1,6 @@
 const { AbortTransaction, Account } = require('./account');
 
+// Bank class - Object manager object
 class Bank {
   constructor({ hours, address, phone }) {
     this.accountsObj = {};

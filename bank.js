@@ -16,8 +16,8 @@ class Bank {
 
   askForValidPassword() {}
 
-  createAccount({ name, amount, password }) {
-    let theAccount = new Account(name, amount, password);
+  createAccount({ name, password, amount }) {
+    let theAccount = new Account(name, password, amount);
     let newAccountNumber = this.nextAccountNumber;
     this.accountsObj[newAccountNumber] = theAccount;
     this.nextAccountNumber = this.nextAccountNumber + 1;
@@ -27,12 +27,12 @@ class Bank {
   async openAccount(promptUser) {
     console.log('*** Open Account ***');
     let userName = await promptUser('What is your username? ');
-    let userStartingAmount = await promptUser('How much is your initial deposit? ');
     let userPassword = await promptUser('Create a new password ');
+    let userStartingAmount = await promptUser('How much is your initial deposit? ');
     let userAccountNumber = this.createAccount({
       name: userName,
-      amount: userStartingAmount,
       password: userPassword,
+      amount: userStartingAmount,
     });
     console.log('Account created, account # ', userAccountNumber);
   }

@@ -8,6 +8,20 @@ const theBank = new Bank({
   phone: '1234567890',
 });
 
+// user interface
+const selections = [
+  '',
+  'To get an account balance, press b',
+  'To close an account, press c',
+  'To make a deposit, press d',
+  'To get bank information, press i',
+  'To open a new accout, press o',
+  'To quit, press q',
+  'To show all accounts, press s',
+  'To make a withdrawal, press w',
+  '',
+];
+
 // main program--------------------------------------------------------
 const readlineInterface = readline.createInterface({
   input: process.stdin,
@@ -22,16 +36,10 @@ const promptUser = (questionText) => {
 
 const startBank = async () => {
   while (true) {
-    console.log();
-    console.log('To get an account balance, press b');
-    console.log('To close an account, press c');
-    console.log('To make a deposit, press d');
-    console.log('To get bank information, press i');
-    console.log('To open a new accout, press o');
-    console.log('To quit, press q');
-    console.log('To show all accounts, press s');
-    console.log('To make a withdrawal, press w');
-    console.log();
+    for (const selection of selections) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      console.log(selection);
+    }
 
     let action = await promptUser('What would you like to do? ');
     console.log();
@@ -47,7 +55,6 @@ const startBank = async () => {
         theBank.getInfo();
       } else if (action === 'o') {
         await theBank.openAccount(promptUser);
-        console.log('test1');
       } else if (action === 'q') {
         process.exit();
       } else if (action === 's') {

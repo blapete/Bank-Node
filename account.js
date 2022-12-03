@@ -18,7 +18,9 @@ class Account {
   }
 
   validateAmount(amount) {
-    if (isNaN(amount)) throw new AbortTransaction('Amount must be an integer');
+    console.log('amount:', amount);
+    if (isNaN(parseFloat(amount)))
+      throw new AbortTransaction('Amount must be an integer');
     if (amount < 0) throw new AbortTransaction('Amount must be positive');
 
     return amount;

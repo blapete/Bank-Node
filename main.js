@@ -46,7 +46,8 @@ const startBank = async () => {
       } else if (action === 'i') {
         theBank.getInfo();
       } else if (action === 'o') {
-        theBank.openAccount();
+        theBank.openAccount(promptUser);
+        let thing = await promptUser('What would you like to do? ');
       } else if (action === 'q') {
         process.exit();
       } else if (action === 's') {

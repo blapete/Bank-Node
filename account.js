@@ -8,12 +8,12 @@ class AbortTransaction extends Error {
 
 // Account
 class Account {
-  constructor({ name, balance, password }) {
-    this.name = name;
-    this.balance = this.validateAmount(balance);
-    this.password = password;
+  constructor(userName, userStartingAmount, userPassword) {
+    this.name = userName;
+    this.balance = this.validateAmount(userStartingAmount);
+    this.password = userPassword;
 
-    if (Object.keys(arguments[0]).length != 3)
+    if (Object.keys(arguments).length != 3)
       throw new AbortTransaction('All fields required');
   }
 

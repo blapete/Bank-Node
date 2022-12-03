@@ -17,7 +17,7 @@ class Bank {
   askForValidPassword() {}
 
   createAccount({ name, amount, password }) {
-    let theAccount = new Account({ name, amount, password });
+    let theAccount = new Account(name, amount, password);
     let newAccountNumber = this.nextAccountNumber;
     this.accountsObj[newAccountNumber] = theAccount;
     this.nextAccountNumber = this.nextAccountNumber + 1;

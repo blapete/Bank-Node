@@ -46,8 +46,8 @@ const startBank = async () => {
       } else if (action === 'i') {
         theBank.getInfo();
       } else if (action === 'o') {
-        theBank.openAccount(promptUser);
-        let thing = await promptUser('What would you like to do? ');
+        await theBank.openAccount(promptUser);
+        console.log('test1');
       } else if (action === 'q') {
         process.exit();
       } else if (action === 's') {
@@ -58,6 +58,8 @@ const startBank = async () => {
         process.exit();
       }
     } catch (e) {}
+
+    await new Promise((resolve) => setTimeout(resolve, 1500));
   }
 };
 

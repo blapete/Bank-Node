@@ -64,7 +64,9 @@ const startBank = async () => {
       } else {
         process.exit();
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(`\n${e.message}`);
+    }
 
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }

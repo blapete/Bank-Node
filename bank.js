@@ -70,23 +70,17 @@ class Bank {
   }
 
   // For bank admin
-  admin(password) {
-    if (password === this.#bankAdminPassword) {
-      return 'passwords match';
-    } else {
-      return 'not a match';
+  async admin(promptUser) {
+    console.log('*** Admin Login ***');
+    let access = await promptUser('What is the admin password? ');
+    if (access != this.#bankAdminPassword)
+      throw new AbortTransaction('Incorrect Password');
+    if (!Object.keys(this.accountsObj).length)
+      return console.log(`There are no accounts yet at ${this.name}`);
+    for (const key of Object.keys(this.accountsObj)) {
+      console.log(`Account # ${key}: `, this.accountsObj[key]);
     }
   }
 }
-
-const theBank = new Bank({
-  name: 'bank of chicago',
-  hours: '10 - 2',
-  address: '123 Michigan Ave',
-  phone: '1234567890',
-  adminPassword: 'testing',
-});
-
-console.log(theBank.admin('testing'));
 
 module.exports = { Bank };

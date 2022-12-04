@@ -3,13 +3,12 @@ const { Bank } = require('./bank');
 
 // bank instance
 const theBank = new Bank({
-  hours: 10 - 2,
+  name: 'bank of chicago',
+  hours: '10 - 2',
   address: '123 Michigan Ave',
   phone: '1234567890',
+  adminPassword: 'testing',
 });
-
-console.log(Bank.show());
-// console.log(theBank.show());
 
 // user interface
 const selections = [
@@ -61,7 +60,7 @@ const startProgram = async () => {
       } else if (action === 'q') {
         process.exit();
       } else if (action === 's') {
-        theBank.show();
+        await theBank.admin(promptUser);
       } else if (action === 'w') {
         theBank.withdraw();
       } else {

@@ -4,9 +4,10 @@ const { AbortTransaction, Account } = require('./account');
 class Bank {
   #password;
 
-  constructor({ hours, address, phone, adminPassword }) {
+  constructor({ name, hours, address, phone, adminPassword }) {
     this.accountsObj = {};
     this.nextAccountNumber = 0;
+    this.name = name;
     this.hours = hours;
     this.address = address;
     this.phone = phone;
@@ -69,7 +70,7 @@ class Bank {
   }
 
   // For bank admin
-  show(password) {
+  admin(password) {
     if (password === this.#bankAdminPassword) {
       return 'passwords match';
     } else {
@@ -79,12 +80,13 @@ class Bank {
 }
 
 const theBank = new Bank({
-  hours: 10 - 2,
+  name: 'bank of chicago',
+  hours: '10 - 2',
   address: '123 Michigan Ave',
   phone: '1234567890',
   adminPassword: 'testing',
 });
 
-console.log(theBank.show('testing'));
+console.log(theBank.admin('testing'));
 
 module.exports = { Bank };

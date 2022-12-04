@@ -2,12 +2,23 @@ const { AbortTransaction, Account } = require('./account');
 
 // Bank class - Object manager object
 class Bank {
-  constructor({ hours, address, phone }) {
+  #password;
+
+  constructor({ hours, address, phone, adminPassword }) {
     this.accountsObj = {};
     this.nextAccountNumber = 0;
     this.hours = hours;
     this.address = address;
     this.phone = phone;
+    this.#bankAdminPassword = adminPassword;
+  }
+
+  get #bankAdminPassword() {
+    return this.#password;
+  }
+
+  set #bankAdminPassword(adminPassword) {
+    this.#password = adminPassword;
   }
 
   askForValidAccountNumber() {}
@@ -58,7 +69,22 @@ class Bank {
   }
 
   // For bank admin
-  show() {}
+  show(password) {
+    if (password === this.#bankAdminPassword) {
+      return 'passwords match';
+    } else {
+      return 'not a match';
+    }
+  }
 }
+
+const theBank = new Bank({
+  hours: 10 - 2,
+  address: '123 Michigan Ave',
+  phone: '1234567890',
+  adminPassword: 'testing',
+});
+
+console.log(theBank.show('testing'));
 
 module.exports = { Bank };

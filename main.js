@@ -8,6 +8,9 @@ const theBank = new Bank({
   phone: '1234567890',
 });
 
+console.log(Bank.show());
+// console.log(theBank.show());
+
 // user interface
 const selections = [
   '',
@@ -34,7 +37,7 @@ const promptUser = (questionText) => {
   });
 };
 
-const startBank = async () => {
+const startProgram = async () => {
   while (true) {
     for (const selection of selections) {
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -72,4 +75,4 @@ const startBank = async () => {
   }
 };
 
-startBank();
+startProgram();

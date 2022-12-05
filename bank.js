@@ -22,11 +22,26 @@ class Bank {
     this.#password = adminPassword;
   }
 
-  askForValidAccountNumber() {}
+  async askForValidAccountNumber(promptUser) {
+    let accountNumber = await promptUser('What is your account number? ');
+    if (isNaN(parseInt(accountNumber)))
+      throw new AbortTransaction('Amount must be an integer');
+    if (!(accountNumber in this.accountsObj))
+      throw new AbortTransaction(`There is no account  ${accountNumber} `);
+    return accountNumber;
+  }
 
-  getUsersAccount() {}
+  async getUsersAccount(promptUser) {
+    let accountNumber = await this.askForValidAccountNumber(promptUser);
+    let theAccount = this.accountsObj[accountNumber];
+    await this.askForValidPassword(promptUser, theAccount);
+    return theAccount;
+  }
 
-  askForValidPassword() {}
+  async askForValidPassword(promptUser, theAccount) {
+    let password = await promptUser('Please enter your password');
+    theAccount.checkPasswordMatch(password);
+  }
 
   createAccount({ name, password, amount }) {
     let theAccount = new Account(name, password, amount);
@@ -53,8 +68,11 @@ class Bank {
     console.log('*** Close Account ***');
   }
 
-  balance() {
+  async balance(promptUser) {
     console.log('*** Get Balance ***');
+    let theAccount = await this.getUsersAccount(promptUser);
+    let theBalance = await theAccount.getBalance();
+    console.log(`Total balance: ${theBalance}`);
   }
 
   deposit() {

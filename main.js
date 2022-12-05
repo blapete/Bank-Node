@@ -48,7 +48,7 @@ const promptUser = (questionText) => {
 
     try {
       if (action === 'b') {
-        theBank.balance();
+        await theBank.balance(promptUser);
       } else if (action === 'c') {
         theBank.closeAccount();
       } else if (action === 'd') {

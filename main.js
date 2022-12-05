@@ -52,7 +52,7 @@ const promptUser = (questionText) => {
          } else if (action === 'c') {
             theBank.closeAccount();
          } else if (action === 'd') {
-            theBank.deposit();
+            await theBank.deposit(promptUser);
          } else if (action === 'i') {
             theBank.getInfo();
          } else if (action === 'o') {

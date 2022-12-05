@@ -39,7 +39,7 @@ class Bank {
    }
 
    async askForValidPassword(promptUser, theAccount) {
-      let password = await promptUser('Please enter your password');
+      let password = await promptUser('Please enter your password ');
       theAccount.checkPasswordMatch(password);
    }
 
@@ -55,7 +55,7 @@ class Bank {
       console.log('*** Open Account ***');
       let userName = await promptUser('What is your username? ');
       let userPassword = await promptUser('Create a new password ');
-      let userStartingAmount = await promptUser('How much is your initial deposit? ');
+      let userStartingAmount = await promptUser('How much is your initial deposit? '); // bug
       let userAccountNumber = await this.createAccount({
          name: userName,
          password: userPassword,
@@ -65,6 +65,7 @@ class Bank {
    }
 
    closeAccount() {
+      // make sure to check that account numbers dont change when an account is removed
       console.log('*** Close Account ***');
    }
 
@@ -75,8 +76,12 @@ class Bank {
       console.log(`Total balance: ${theBalance}`);
    }
 
-   deposit() {
+   async deposit(promptUser) {
       console.log(' *** Deposit ***');
+      let theAccount = await this.getUsersAccount(promptUser);
+      let depositAmount = await promptUser('Amount: ');
+      let theBalance = await theAccount.deposit(depositAmount);
+      console.log(`Deposited: ${depositAmount}\nYour new balance is: ${theBalance}`);
    }
 
    withdraw() {

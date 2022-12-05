@@ -22,7 +22,7 @@ class Account {
          throw new AbortTransaction('Amount must be an integer');
       if (amount < 0) throw new AbortTransaction('Amount must be positive');
 
-      return amount;
+      return parseFloat(amount);
    }
 
    checkPasswordMatch(password) {

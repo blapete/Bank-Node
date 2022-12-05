@@ -55,7 +55,7 @@ class Bank {
       console.log('*** Open Account ***');
       let userName = await promptUser('What is your username? ');
       let userPassword = await promptUser('Create a new password ');
-      let userStartingAmount = await promptUser('How much is your initial deposit? '); // bug
+      let userStartingAmount = await promptUser('How much is your initial deposit? '); // bug* -> see acount.js
       let userAccountNumber = await this.createAccount({
          name: userName,
          password: userPassword,

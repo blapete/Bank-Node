@@ -18,6 +18,7 @@ class Account {
    }
 
    validateAmount(amount) {
+      // bug *
       if (isNaN(parseFloat(amount)))
          throw new AbortTransaction('Amount must be an integer');
       if (amount < 0) throw new AbortTransaction('Amount must be positive');

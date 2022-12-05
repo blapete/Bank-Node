@@ -74,11 +74,18 @@ class Bank {
     console.log('*** Admin Login ***');
     let access = await promptUser('What is the admin password? ');
     if (access != this.#bankAdminPassword)
-      throw new AbortTransaction('Incorrect Password');
+      throw new AbortTransaction('Authentication failed: Incorrect Password');
     if (!Object.keys(this.accountsObj).length)
       return console.log(`There are no accounts yet at ${this.name}`);
-    for (const key of Object.keys(this.accountsObj)) {
-      console.log(`Account # ${key}: `, this.accountsObj[key]);
+    for (const acct of Object.keys(this.accountsObj)) {
+      let out = `Account # ${acct} `;
+      for (let i = 0; i < Object.keys(this.accountsObj[acct]).length; i++) {
+        out += ` ${Object.keys(this.accountsObj[acct])[i]}: ${
+          this.accountsObj[acct][Object.keys(this.accountsObj[acct])[i]]
+        }`;
+      }
+
+      console.log(out);
     }
   }
 }

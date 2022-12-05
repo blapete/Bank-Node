@@ -1,4 +1,4 @@
-/* Custom exception */
+/* custom exception */
 class AbortTransaction extends Error {
   constructor(message) {
     super(message);
@@ -6,7 +6,7 @@ class AbortTransaction extends Error {
   }
 }
 
-/* Account class*/
+/* account class*/
 class Account {
   constructor(userName, userPassword, userStartingAmount) {
     if (!userName || !userPassword || !userStartingAmount)

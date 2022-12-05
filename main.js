@@ -24,18 +24,20 @@ const selections = [
   '',
 ];
 
-/* main program-------------------------------------------------------- */
+/* getting user input */
 const readlineInterface = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
+/* for async actions */
 const promptUser = (questionText) => {
   return new Promise((resolve) => {
     readlineInterface.question(questionText, (input) => resolve(input.toLowerCase()));
   });
 };
 
+/* main program-------------------------------------------------------- */
 (async () => {
   while (true) {
     for (const selection of selections) {

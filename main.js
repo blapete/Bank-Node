@@ -36,7 +36,7 @@ const promptUser = (questionText) => {
   });
 };
 
-const startProgram = async () => {
+(async () => {
   while (true) {
     for (const selection of selections) {
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -72,6 +72,4 @@ const startProgram = async () => {
 
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }
-};
-
-startProgram();
+})();

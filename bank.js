@@ -1,6 +1,6 @@
 const { AbortTransaction, Account } = require('./account');
 
-// Bank class - Object manager object
+/* Bank class - Object manager object */
 class Bank {
   #password;
 
@@ -69,7 +69,7 @@ class Bank {
     console.log(`hours: ${this.hours} \nAddress: ${this.address} \nPhone: ${this.phone}`);
   }
 
-  // For bank admin
+  /* For bank admin */
   async admin(promptUser) {
     console.log('*** Admin Login ***');
     let access = await promptUser('What is the admin password? ');
@@ -77,6 +77,7 @@ class Bank {
       throw new AbortTransaction('Authentication failed');
     if (!Object.keys(this.accountsObj).length)
       return console.log(`\nThere are no accounts yet at ${this.name}`);
+    // Print each account as a string to the terminal
     for (const acct of Object.keys(this.accountsObj)) {
       let out = `Account # ${acct} `;
       for (let i = 0; i < Object.keys(this.accountsObj[acct]).length; i++) {
@@ -84,7 +85,6 @@ class Bank {
           this.accountsObj[acct][Object.keys(this.accountsObj[acct])[i]]
         }`;
       }
-
       console.log(out);
     }
   }

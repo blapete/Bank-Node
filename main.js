@@ -1,7 +1,7 @@
 const readline = require('readline');
 const { Bank } = require('./bank');
 
-// bank instance
+/* bank instance for development*/
 const theBank = new Bank({
   name: 'bank of chicago',
   hours: '10 - 2',
@@ -10,7 +10,7 @@ const theBank = new Bank({
   adminPassword: 'testing',
 });
 
-// user interface
+/* user interface */
 const selections = [
   '',
   'To open a new accout, press o',
@@ -24,7 +24,7 @@ const selections = [
   '',
 ];
 
-// main program--------------------------------------------------------
+/* main program-------------------------------------------------------- */
 const readlineInterface = readline.createInterface({
   input: process.stdin,
   output: process.stdout,

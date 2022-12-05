@@ -43,7 +43,7 @@ class Bank {
       theAccount.checkPasswordMatch(password);
    }
 
-   createAccount({ name, password, amount }) {
+   async createAccount({ name, password, amount }) {
       let theAccount = new Account(name, password, amount);
       let newAccountNumber = this.nextAccountNumber;
       this.accountsObj[newAccountNumber] = theAccount;
@@ -56,7 +56,7 @@ class Bank {
       let userName = await promptUser('What is your username? ');
       let userPassword = await promptUser('Create a new password ');
       let userStartingAmount = await promptUser('How much is your initial deposit? ');
-      let userAccountNumber = this.createAccount({
+      let userAccountNumber = await this.createAccount({
          name: userName,
          password: userPassword,
          amount: userStartingAmount,

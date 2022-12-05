@@ -13,14 +13,14 @@ const theBank = new Bank({
 // user interface
 const selections = [
   '',
+  'To open a new accout, press o',
+  'To make a deposit, press d',
+  'To make a withdrawal, press w',
   'To get an account balance, press b',
   'To close an account, press c',
-  'To make a deposit, press d',
   'To get bank information, press i',
-  'To open a new accout, press o',
-  'To quit, press q',
   'To show all accounts, press s',
-  'To make a withdrawal, press w',
+  'To quit, press q',
   '',
 ];
 
@@ -32,7 +32,7 @@ const readlineInterface = readline.createInterface({
 
 const promptUser = (questionText) => {
   return new Promise((resolve) => {
-    readlineInterface.question(questionText, (input) => resolve(input));
+    readlineInterface.question(questionText, (input) => resolve(input.toLowerCase()));
   });
 };
 
@@ -57,14 +57,14 @@ const startProgram = async () => {
         theBank.getInfo();
       } else if (action === 'o') {
         await theBank.openAccount(promptUser);
-      } else if (action === 'q') {
-        process.exit();
       } else if (action === 's') {
         await theBank.admin(promptUser);
       } else if (action === 'w') {
         theBank.withdraw();
-      } else {
+      } else if (action === 'q') {
         process.exit();
+      } else {
+        console.log('Please select a valid option');
       }
     } catch (e) {
       console.error(`\n${e.name}: ${e.message}`);

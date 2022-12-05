@@ -74,9 +74,9 @@ class Bank {
     console.log('*** Admin Login ***');
     let access = await promptUser('What is the admin password? ');
     if (access != this.#bankAdminPassword)
-      throw new AbortTransaction('Authentication failed: Incorrect Password');
+      throw new AbortTransaction('Authentication failed');
     if (!Object.keys(this.accountsObj).length)
-      return console.log(`There are no accounts yet at ${this.name}`);
+      return console.log(`\nThere are no accounts yet at ${this.name}`);
     for (const acct of Object.keys(this.accountsObj)) {
       let out = `Account # ${acct} `;
       for (let i = 0; i < Object.keys(this.accountsObj[acct]).length; i++) {

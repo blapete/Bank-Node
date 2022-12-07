@@ -50,7 +50,7 @@ const promptUser = (questionText) => {
             if (action === 'b') {
                 await theBank.balance(promptUser);
             } else if (action === 'c') {
-                theBank.closeAccount();
+                await theBank.closeAccount(promptUser);
             } else if (action === 'd') {
                 await theBank.deposit(promptUser);
             } else if (action === 'o') {

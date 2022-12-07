@@ -62,9 +62,15 @@ class Bank {
         console.log('Account created, account # ', userAccountNumber);
     }
 
-    closeAccount() {
-        // make sure to check that account numbers dont change when an account is removed
+    async closeAccount(promptUser) {
         console.log('*** Close Account ***');
+        let userAccountNumber = await this.askForValidAccountNumber(promptUser);
+        let theAccount = this.accountsObj[userAccountNumber];
+        await this.askForValidPassword(promptUser, theAccount);
+        let theBalance = theAccount.getBalance();
+        console.log('You had ', theBalance, ' in your account, returned to you');
+        delete this.accountsObj[userAccountNumber];
+        console.log('You account is now closed');
     }
 
     async balance(promptUser) {

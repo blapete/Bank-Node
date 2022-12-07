@@ -1,5 +1,7 @@
-Practice
+practice
 
-The bank class is an object manager object that manages accounts
+the bank class is an object manager object that manages accounts
 
-Using async to make a synchronous-like feel of this cli app
+using async to make a synchronous-like feel of this cli app
+
+also wanted to make a cli app using a built-in node module

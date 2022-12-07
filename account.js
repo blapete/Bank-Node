@@ -35,8 +35,8 @@ class Account {
     withdraw(amountToWithdraw) {
         amountToWithdraw = this.validateAmount(amountToWithdraw);
         if (amountToWithdraw > this.balance) throw new AbortTransaction('Insufficient funds');
-
         this.balance = this.balance - amountToWithdraw;
+        return this.balance.toFixed(2);
     }
 
     getBalance() {

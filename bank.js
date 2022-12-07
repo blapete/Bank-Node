@@ -82,8 +82,12 @@ class Bank {
         console.log(`\nDeposited: ${depositAmount}\nYour new balance is: ${theBalance}`);
     }
 
-    withdraw() {
+    async withdraw(promptUser) {
         console.log(' *** Withdraw ***');
+        let theAccount = await this.getUsersAccount(promptUser);
+        let userAmount = await promptUser('Amount: ');
+        let theBalance = theAccount.withdraw(userAmount);
+        console.log('You new balance is: ', theBalance);
     }
 
     getInfo() {

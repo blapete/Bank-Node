@@ -39,12 +39,11 @@ const promptUser = (questionText) => {
 (async () => {
     while (true) {
         for (const selection of selections) {
-            await new Promise((resolve) => setTimeout(resolve, 50));
             console.log(selection);
         }
 
         let action = await promptUser('What would you like to do? ');
-        console.log();
+        console.log('');
 
         try {
             if (action === 'b') {
@@ -70,6 +69,7 @@ const promptUser = (questionText) => {
             console.error(`\n${e.name}: ${e.message}`);
         }
 
+        console.log('');
         await new Promise((resolve) => setTimeout(resolve, 1500));
     }
 })();

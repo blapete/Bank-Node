@@ -22,6 +22,10 @@ class Bank {
         this.#password = adminPassword;
     }
 
+    getInfo() {
+        return console.log(`hours: ${this.hours} \nAddress: ${this.address} \nPhone: ${this.phone}`);
+    }
+
     currencyFormatter(amount) {
         return (
             Number(amount)
@@ -91,8 +95,7 @@ class Bank {
     async balance(promptUser) {
         console.log('*** Get Balance ***');
         let theAccount = await this.getUsersAccount(promptUser);
-        let theBalance = await theAccount.getBalance();
-        console.log('Total balance: ', theBalance);
+        await theAccount.getBalance();
     }
 
     async deposit(promptUser) {
@@ -111,10 +114,6 @@ class Bank {
         let validatedAmount = this.validateAmount(userAmount);
         let theBalance = theAccount.withdraw(validatedAmount);
         console.log('You new balance is: ', this.currencyFormatter(theBalance));
-    }
-
-    getInfo() {
-        return console.log(`hours: ${this.hours} \nAddress: ${this.address} \nPhone: ${this.phone}`);
     }
 
     /* for bank admin */

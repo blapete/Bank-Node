@@ -34,11 +34,11 @@ class Account {
     }
 
     getBalance() {
-        return this.balance;
+        return this.show();
     }
 
     show() {
-        console.log('       Name:', this.name);
+        console.log('\n       Name:', this.name);
         console.log('       Balance:', this.balance);
         console.log('       Password:', this.password);
     }

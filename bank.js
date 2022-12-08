@@ -22,6 +22,14 @@ class Bank {
         this.#password = adminPassword;
     }
 
+    currencyFormatter(amount) {
+        return (
+            Number(amount)
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' USD'
+        );
+    }
+
     async askForValidAccountNumber(promptUser) {
         let accountNumber = await promptUser('What is your account number? ');
         if (isNaN(parseInt(accountNumber))) throw new AbortTransaction('Amount must be an integer');
@@ -41,8 +49,8 @@ class Bank {
         theAccount.checkPasswordMatch(password);
     }
 
-    async createAccount({ name, password, amount }) {
-        let theAccount = new Account(name, password, amount);
+    async createAccount({ name, password, amount, formatter }) {
+        let theAccount = new Account(name, password, amount, formatter);
         let newAccountNumber = this.nextAccountNumber;
         this.accountsObj[newAccountNumber] = theAccount;
         this.nextAccountNumber = this.nextAccountNumber + 1;
@@ -58,6 +66,7 @@ class Bank {
             name: userName,
             password: userPassword,
             amount: userStartingAmount,
+            formatter: this.currencyFormatter,
         });
         console.log('Account created, account # ', userAccountNumber);
     }
@@ -84,8 +93,8 @@ class Bank {
         console.log(' *** Deposit ***');
         let theAccount = await this.getUsersAccount(promptUser);
         let depositAmount = await promptUser('Amount: ');
-        let theBalance = await theAccount.deposit(depositAmount);
-        console.log(`\nDeposited: ${depositAmount}\nYour new balance is: ${theBalance}`);
+        let { amountDeposited, newBalance } = await theAccount.deposit(depositAmount);
+        console.log('\nDeposited: ', amountDeposited, '\nYour new balance is: ', this.currencyFormatter(newBalance));
     }
 
     async withdraw(promptUser) {
@@ -93,7 +102,7 @@ class Bank {
         let theAccount = await this.getUsersAccount(promptUser);
         let userAmount = await promptUser('Amount: ');
         let theBalance = theAccount.withdraw(userAmount);
-        console.log('You new balance is: ', theBalance);
+        console.log('You new balance is: ', this.currencyFormatter(theBalance));
     }
 
     getInfo() {

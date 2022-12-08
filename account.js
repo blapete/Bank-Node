@@ -34,7 +34,7 @@ class Account {
     }
 
     getBalance() {
-        return this.show();
+        return this.balance;
     }
 
     show() {

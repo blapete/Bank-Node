@@ -123,14 +123,13 @@ class Bank {
         if (access != this.#bankAdminPassword) throw new AbortTransaction('Authentication failed');
         if (!Object.keys(this.accountsObj).length) return console.log(`\nThere are no accounts yet at ${this.name}`);
 
-        // print each account as a string to the terminal
-        for (const acct of Object.keys(this.accountsObj)) {
-            let out = `Account # ${acct} `;
-
-            for (let i = 0; i < Object.keys(this.accountsObj[acct]).length; i++) {
-                out += ` ${Object.keys(this.accountsObj[acct])[i]}: ${this.accountsObj[acct][Object.keys(this.accountsObj[acct])[i]]}`;
+        // print out accounts
+        for (const acctNum in this.accountsObj) {
+            var str = `Account #  ${acctNum} --->`;
+            for (const prop in this.accountsObj[acctNum]) {
+                str += ` ${prop} ${this.accountsObj[acctNum][prop]}`;
             }
-            console.log(out);
+            console.log(str);
         }
     }
 }

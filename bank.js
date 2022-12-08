@@ -30,6 +30,12 @@ class Bank {
         );
     }
 
+    validateAmount(amount) {
+        if (isNaN(Number(amount))) throw new AbortTransaction('Amount must be a valid value');
+        if (amount < 0) throw new AbortTransaction('Amount must be positive');
+        return this.currencyFormatter(amount);
+    }
+
     async askForValidAccountNumber(promptUser) {
         let accountNumber = await promptUser('What is your account number? ');
         if (isNaN(parseInt(accountNumber))) throw new AbortTransaction('Amount must be an integer');
@@ -49,8 +55,8 @@ class Bank {
         theAccount.checkPasswordMatch(password);
     }
 
-    async createAccount({ name, password, amount, formatter }) {
-        let theAccount = new Account(name, password, amount, formatter);
+    async createAccount({ name, password, amount }) {
+        let theAccount = new Account(name, password, amount);
         let newAccountNumber = this.nextAccountNumber;
         this.accountsObj[newAccountNumber] = theAccount;
         this.nextAccountNumber = this.nextAccountNumber + 1;
@@ -62,11 +68,11 @@ class Bank {
         let userName = await promptUser('What is your username? ');
         let userPassword = await promptUser('Create a new password ');
         let userStartingAmount = await promptUser('How much is your initial deposit? ');
+        let validatedAmount = this.validateAmount(userStartingAmount);
         let userAccountNumber = await this.createAccount({
             name: userName,
             password: userPassword,
-            amount: userStartingAmount,
-            formatter: this.currencyFormatter,
+            amount: validatedAmount,
         });
         console.log('Account created, account # ', userAccountNumber);
     }
@@ -93,7 +99,8 @@ class Bank {
         console.log(' *** Deposit ***');
         let theAccount = await this.getUsersAccount(promptUser);
         let depositAmount = await promptUser('Amount: ');
-        let { amountDeposited, newBalance } = await theAccount.deposit(depositAmount);
+        let validatedAmount = this.validateAmount(depositAmount);
+        let { amountDeposited, newBalance } = await theAccount.deposit(validatedAmount);
         console.log('\nDeposited: ', amountDeposited, '\nYour new balance is: ', this.currencyFormatter(newBalance));
     }
 
@@ -101,7 +108,8 @@ class Bank {
         console.log(' *** Withdraw ***');
         let theAccount = await this.getUsersAccount(promptUser);
         let userAmount = await promptUser('Amount: ');
-        let theBalance = theAccount.withdraw(userAmount);
+        let validatedAmount = this.validateAmount(userAmount);
+        let theBalance = theAccount.withdraw(validatedAmount);
         console.log('You new balance is: ', this.currencyFormatter(theBalance));
     }
 

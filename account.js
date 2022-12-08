@@ -8,19 +8,12 @@ class AbortTransaction extends Error {
 
 /* account class*/
 class Account {
-    constructor(userName, userPassword, userStartingAmount, formatter) {
+    constructor(userName, userPassword, userStartingAmount) {
         if (!userName || !userPassword || !userStartingAmount) throw new AbortTransaction('All fields required');
 
         this.name = userName;
         this.password = userPassword;
-        this.formatter = formatter;
-        this.balance = this.validateAmount(userStartingAmount);
-    }
-
-    validateAmount(amount) {
-        if (isNaN(Number(amount))) throw new AbortTransaction('Amount must be a valid value');
-        if (amount < 0) throw new AbortTransaction('Amount must be positive');
-        return this.formatter(amount);
+        this.balance = userStartingAmount;
     }
 
     checkPasswordMatch(password) {
@@ -28,13 +21,13 @@ class Account {
     }
 
     deposit(amountToDeposit) {
-        amountToDeposit = this.validateAmount(amountToDeposit);
+        amountToDeposit = amountToDeposit;
         this.balance = parseFloat(this.balance) + parseFloat(amountToDeposit);
         return { amountDeposited: amountToDeposit, newBalance: this.balance };
     }
 
     withdraw(amountToWithdraw) {
-        amountToWithdraw = this.validateAmount(amountToWithdraw);
+        amountToWithdraw = amountToWithdraw;
         if (parseFloat(amountToWithdraw) > parseFloat(this.balance)) throw new AbortTransaction('Insufficient funds');
         this.balance = parseFloat(this.balance) - parseFloat(amountToWithdraw);
         return this.balance;

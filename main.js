@@ -35,7 +35,7 @@ const promptUser = (questionText) => {
     });
 };
 
-/* main program-------------------------------------------------------- */
+/* main program------------------------------------------------- */
 (async () => {
     while (true) {
         for (const selection of selections) {
